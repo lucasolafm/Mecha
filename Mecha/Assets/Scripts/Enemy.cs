@@ -8,7 +8,8 @@ public class Enemy : Entity
     public float moveSpeed;
     public float fireCooldownMin;
     public float fireCooldownMax;
-    
+
+    private SpriteRenderer _renderer;
     private bool _hidden;
     private float _currentLaunchCooldown;
     private int _direction;

@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
     public Transform player;
     public new Camera camera;
     [SerializeField] private Transform enemyDeathVisual;
+    [SerializeField] private Sprite[] tierSprites;
     public int enemiesInRange;
     public float minSpawnHeight;
     public float spawnRangeUp;
@@ -15,9 +16,12 @@ public class EnemyManager : MonoBehaviour
     public float lowSpawnRangeHeight;
     public int enemiesInRangeLow;
     public float firingRange;
+    [SerializeField] private float timeToMaxDifficulty;
 
     private Enemy[] _enemies;
     private static Dictionary<Collider2D, Enemy> _enemyOfCollider = new Dictionary<Collider2D, Enemy>();
+    private float _timePlaying;
+    private float _currentGeneralTier;
     private float _timeLastSpawn;
     private Vector2 _screenWorldSize;
     private Vector2 _position;
@@ -47,6 +51,9 @@ public class EnemyManager : MonoBehaviour
     
     void Update()
     {
+        _timePlaying += Time.deltaTime;
+        _currentGeneralTier = _timePlaying / timeToMaxDifficulty * tierSprites.Length;
+
         _currentEnemiesInRangeLow = 0;
         foreach (Enemy enemy in _enemies)
         {
@@ -107,8 +114,16 @@ public class EnemyManager : MonoBehaviour
         }
 
         enemy.Transform.position = _position;
+        enemy.GetRenderer().sprite = GetTierSprite();
         enemy.SetDirection(_direction);
         enemy.SetHidden(_position.y < minSpawnHeight);
+    }
+
+    private Sprite GetTierSprite()
+    {
+        return tierSprites[Mathf.Min(Mathf.FloorToInt(_currentGeneralTier) + 
+                           (Random.Range(0, 1f) < _currentGeneralTier - Mathf.FloorToInt(_currentGeneralTier) ? 1 : 0), 
+            tierSprites.Length - 1)];
     }
 
     private Enemy[] CreateEnemies(int amount)

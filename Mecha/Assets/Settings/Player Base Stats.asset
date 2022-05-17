@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stats:
     MaxHealth: 100
-    MoveSpeed: 3
+    MoveSpeed: 2.8
     JumpForce: 1800
     LaunchForce: 1800
     BoostForce: 1800
