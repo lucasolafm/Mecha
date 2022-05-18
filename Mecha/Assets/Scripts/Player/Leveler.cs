@@ -15,6 +15,8 @@ public class Leveler : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
+
+        Experience.ReachedMaxXP.AddListener(OnReachedMaxXP);
     }
 
     void Start()
@@ -22,11 +24,16 @@ public class Leveler : MonoBehaviour
         _currentLevel = 1;
         currentLevelText.text = "Lvl " + _currentLevel;
     }
-    
+
+    private void OnReachedMaxXP()
+    {
+        LevelUp();
+    }
+
+
     public void LevelUp()
     {
         _currentLevel++;
-        _player.ResetXP();
         levelUpText.text = "Level up! (" + _currentLevel + ")";
         currentLevelText.text = "Lvl " + _currentLevel;
         

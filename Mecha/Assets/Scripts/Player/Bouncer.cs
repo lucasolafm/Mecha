@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bouncer : MonoBehaviour
 {
@@ -42,7 +43,6 @@ public class Bouncer : MonoBehaviour
 
     public void Bounce()
     {
-        player.Launch(Player.Stats.BounceForce);
         _canBounce = false;
         StartCoroutine(FlipAnimation());
     }

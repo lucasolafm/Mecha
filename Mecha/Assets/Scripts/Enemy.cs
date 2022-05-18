@@ -38,6 +38,11 @@ public class Enemy : Entity
         Fire();
     }
 
+    public override void OnHit()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void SetDirection(int direction)
     {
         _direction = direction;
@@ -58,7 +63,6 @@ public class Enemy : Entity
     private void Fire()
     {
         _missile = Instantiate(missilePrefab, transform.position, Quaternion.identity);
-        EntityManager.RegisterEntity(_missile);
     }
 
     private float GenerateLaunchCooldown()

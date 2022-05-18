@@ -9,7 +9,7 @@ public class PhysicsPauser : MonoBehaviour
     void Awake()
     {
         GameManager.GamePause.AddListener(OnGamePause);
-        GameManager.GameUnpause.AddListener(OnGameResume);
+        GameManager.GameUnpause.AddListener(OnGameUnpause);
     }
     
     private void OnGamePause()
@@ -19,7 +19,7 @@ public class PhysicsPauser : MonoBehaviour
         rb.isKinematic = true;
     }
     
-    private void OnGameResume()
+    private void OnGameUnpause()
     {
         rb.isKinematic = false;
         rb.velocity = _currentVelocity;

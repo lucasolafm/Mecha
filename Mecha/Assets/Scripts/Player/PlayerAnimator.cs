@@ -30,18 +30,13 @@ public class PlayerAnimator : MonoBehaviour
         Player.Landed.AddListener(OnLanded);
         Player.Jumped.AddListener(OnJumped);
         Player.Bounced.AddListener(OnBounced);
-        Player.HitEnemy.AddListener(OnHitEnemy);
+        Player.Attack.AddListener(OnAttack);
+        Player.FinishAttack.AddListener(OnFinishAttack);
         Player.HitMissile.AddListener(OnHitMissile);
         Player.LeveledUp.AddListener(OnLeveledUp);
-        GameManager.GameUnpause.AddListener(OnGameUnpause);
     }
 
-    private void OnGameUnpause()
-    {
-        _attacking = false;
-    }
-
-    private void OnHitEnemy(Enemy enemy, Vector2 position)
+    private void OnAttack(Enemy enemy, Vector2 position)
     {
         _attacking = true;
         _jumping = true;
@@ -60,8 +55,13 @@ public class PlayerAnimator : MonoBehaviour
             renderer.sprite = attacksSideways[Random.Range(0, attacksSideways.Length)];
         }
     }
-    
-    private void OnHitMissile()
+
+    private void OnFinishAttack()
+    {
+        _attacking = false;
+    }
+
+    private void OnHitMissile(Missile missile)
     {
         _jumping = true;
     }

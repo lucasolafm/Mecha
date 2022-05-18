@@ -13,19 +13,26 @@ public class Comboer : MonoBehaviour
      void Awake()
      {
          Player.HitFloor.AddListener(OnHitFloor);
-     }
-     
-     public int GetCurrentCombo()
-     {
-         return _currentCombo;
+        Player.Attack.AddListener(OnAttack);
      }
      
      private void OnHitFloor()
      {
          _currentCombo = 0;
      }
-     
-     public void IncreaseCombo()
+
+    private void OnAttack(Enemy enemy, Vector2 position)
+    {
+        IncreaseCombo();
+    }
+
+    public int GetCurrentCombo()
+    {
+        return _currentCombo;
+    }
+
+
+    public void IncreaseCombo()
      {
          _currentCombo++;
          comboText.text = _currentCombo + "x";

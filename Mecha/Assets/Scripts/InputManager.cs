@@ -5,19 +5,16 @@ public class InputManager : MonoBehaviour
     public static InputManager I;
 
     [HideInInspector] public float HorizontalTilt;
-    [HideInInspector] public bool Tapped;
 
     [SerializeField] private new Camera camera;
     public RectTransform joystickBase;
     public RectTransform joystickStick;
     public float joystickSizeWorld;
     [SerializeField] private float joystickHeight;
-    public float minPressTime;
 
     private float _joystickSize;
     private Vector2 _centerPos;
     private Touch _touch;
-    private float _pressTime;
 
     void Awake()
     {
@@ -35,7 +32,6 @@ public class InputManager : MonoBehaviour
     public void Tick()
     {
         HorizontalTilt = 0;
-        Tapped = false;
         joystickBase.gameObject.SetActive(false);
         joystickStick.gameObject.SetActive(false);
 
@@ -67,17 +63,10 @@ public class InputManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 SetCenter(Input.mousePosition);
-                _pressTime = Time.time;
             }
         
             HorizontalTilt = GetHorizontalTilt(Input.mousePosition.x);
             SetStickPosition();
-        }
-
-        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W) || 
-            Input.GetMouseButtonUp(0) && Time.time - _pressTime < minPressTime)
-        {
-            Tapped = true;
         }
 
         if (Input.touchCount > 0)
@@ -86,12 +75,7 @@ public class InputManager : MonoBehaviour
             if (_touch.phase == TouchPhase.Began)
             {
                 SetCenter(Input.mousePosition);
-                _pressTime = Time.time;
             }
-        }
-        else if (_touch.phase == TouchPhase.Ended && Time.time - _pressTime < minPressTime)
-        {
-            Tapped = true;
         }
     }
     

@@ -32,8 +32,8 @@ public class EnemyManager : MonoBehaviour
 
     void Awake()
     {
-        Player.HitEnemy.AddListener(OnHitEnemy);
-        GameManager.GameUnpause.AddListener(OnGameUnpause);
+        Player.Attack.AddListener(OnAttack);
+        Player.FinishAttack.AddListener(OnFinishAttack);
         
         _screenWorldSize = camera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)) - 
                            camera.ScreenToWorldPoint(Vector2.zero);
@@ -81,14 +81,15 @@ public class EnemyManager : MonoBehaviour
         return enemy;
     }
     
-    private void OnHitEnemy(Enemy enemy, Vector2 position)
+    private void OnAttack(Enemy enemy, Vector2 position)
     {
+        enemy.OnHit();
         enemyDeathVisual.gameObject.SetActive(true);
         enemyDeathVisual.position = enemy.transform.position;
         SpawnEnemy(enemy);
     }
     
-    private void OnGameUnpause()
+    private void OnFinishAttack()
     {
         enemyDeathVisual.gameObject.SetActive(false);
     }

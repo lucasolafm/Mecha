@@ -23,6 +23,8 @@ public class Entity : MonoBehaviour
         _collider = GetComponent<Collider2D>();
     }
 
+    public virtual void OnHit() { }
+
     public SpriteRenderer GetRenderer()
     {
         return _renderer;

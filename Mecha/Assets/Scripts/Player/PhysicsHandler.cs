@@ -7,34 +7,30 @@ public class PhysicsHandler : MonoBehaviour
     public float fallingGravityMultiplier;
     
     private float _launchForce;
-    private bool _launchAfterResume;
 
     void Awake()
     {
-        GameManager.GameUnpause.AddListener(OnGameResume);
-        Player.HitEnemy.AddListener(OnHitEnemy);
+        Player.FinishAttack.AddListener(OnFinishAttack);
         Player.HitMissile.AddListener(OnHitMissile);
+        Player.Bounced.AddListener(OnBounced);
     }
 
-    private void OnGameResume()
+    private void OnFinishAttack()
     {
-        if (!_launchAfterResume) return;
-        _launchAfterResume = false;
-
         rb.velocity = Vector2.zero;
         Launch(Player.Stats.LaunchForce);
     }
-    
-    private void OnHitEnemy(Enemy enemy, Vector2 position)
-    {
-        _launchAfterResume = true;
-    }
 
-    private void OnHitMissile()
+    private void OnHitMissile(Missile missile)
     {
         if (GameManager.I.GameIsPaused) return;
         
         Launch(Player.Stats.LaunchForce);
+    }
+
+    private void OnBounced()
+    {
+        Launch(Player.Stats.BounceForce);
     }
 
     public void FixedTick()
