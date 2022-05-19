@@ -1,21 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class Leveler : MonoBehaviour
 {
+    public static UnityEvent LeveledUp = new UnityEvent();
+
     public TextMeshPro levelUpText;
     public TextMeshProUGUI currentLevelText;
     public float showLevelUpTime;
-
-    private Player _player;
+    
     private int _currentLevel;
     private Coroutine _hideLevelUpRoutine;
 
-    private void Awake()
+    void Awake()
     {
-        _player = GetComponent<Player>();
-
         Experience.ReachedMaxXP.AddListener(OnReachedMaxXP);
     }
 
@@ -28,13 +28,13 @@ public class Leveler : MonoBehaviour
     private void OnReachedMaxXP()
     {
         LevelUp();
+        LeveledUp.Invoke();
     }
 
-
-    public void LevelUp()
+    private void LevelUp()
     {
         _currentLevel++;
-        levelUpText.text = "Level up! (" + _currentLevel + ")";
+        levelUpText.text = "Level up!";
         currentLevelText.text = "Lvl " + _currentLevel;
         
         if (_hideLevelUpRoutine != null) StopCoroutine(_hideLevelUpRoutine);

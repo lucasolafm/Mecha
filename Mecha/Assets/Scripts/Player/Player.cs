@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     public static UnityEvent<Enemy, Vector2> Attack = new UnityEvent<Enemy, Vector2>();
     public static UnityEvent FinishAttack = new UnityEvent();
     public static UnityEvent<Missile> HitMissile = new UnityEvent<Missile>();
-    public static UnityEvent LeveledUp = new UnityEvent();
 
     [SerializeField] private CameraController cameraController;
     [SerializeField] private PlayerBaseStats baseStats;

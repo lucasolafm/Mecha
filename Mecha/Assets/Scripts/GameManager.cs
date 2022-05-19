@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Player.Attack.AddListener(OnAttack);
-        Player.LeveledUp.AddListener(OnLeveledUp);
+        Leveler.LeveledUp.AddListener(OnLeveledUp);
         
         I = this;
     }

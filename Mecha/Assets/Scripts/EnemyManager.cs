@@ -83,7 +83,6 @@ public class EnemyManager : MonoBehaviour
     
     private void OnAttack(Enemy enemy, Vector2 position)
     {
-        enemy.OnHit();
         enemyDeathVisual.gameObject.SetActive(true);
         enemyDeathVisual.position = enemy.transform.position;
         SpawnEnemy(enemy);

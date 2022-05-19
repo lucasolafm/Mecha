@@ -33,7 +33,7 @@ public class PlayerAnimator : MonoBehaviour
         Player.Attack.AddListener(OnAttack);
         Player.FinishAttack.AddListener(OnFinishAttack);
         Player.HitMissile.AddListener(OnHitMissile);
-        Player.LeveledUp.AddListener(OnLeveledUp);
+        Leveler.LeveledUp.AddListener(OnLeveledUp);
     }
 
     private void OnAttack(Enemy enemy, Vector2 position)
