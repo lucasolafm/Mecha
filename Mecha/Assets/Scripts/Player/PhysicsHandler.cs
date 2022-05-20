@@ -11,7 +11,7 @@ public class PhysicsHandler : MonoBehaviour
     void Awake()
     {
         Player.FinishAttack.AddListener(OnFinishAttack);
-        Player.HitMissile.AddListener(OnHitMissile);
+        Player.HitProjectile.AddListener(OnHitProjectile);
         Player.Bounced.AddListener(OnBounced);
     }
 
@@ -21,7 +21,7 @@ public class PhysicsHandler : MonoBehaviour
         Launch(Player.Stats.LaunchForce);
     }
 
-    private void OnHitMissile(Missile missile)
+    private void OnHitProjectile(Projectile projectile)
     {
         if (GameManager.I.GameIsPaused) return;
         

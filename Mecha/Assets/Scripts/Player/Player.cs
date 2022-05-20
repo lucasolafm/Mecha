@@ -11,15 +11,12 @@ public class Player : MonoBehaviour
     public static UnityEvent HitEntity = new UnityEvent();
     public static UnityEvent<Enemy, Vector2> Attack = new UnityEvent<Enemy, Vector2>();
     public static UnityEvent FinishAttack = new UnityEvent();
-    public static UnityEvent<Missile> HitMissile = new UnityEvent<Missile>();
+    public static UnityEvent<Projectile> HitProjectile = new UnityEvent<Projectile>();
 
     [SerializeField] private CameraController cameraController;
     [SerializeField] private PlayerBaseStats baseStats;
 
     private Rigidbody2D _rb;
-    private Health _health;
-    private Experience _experience;
-    private Leveler _leveler;
     private Mover _mover;
     private Comboer _comboer;
     private PhysicsHandler _physicsHandler;
@@ -39,9 +36,6 @@ public class Player : MonoBehaviour
         _mover = GetComponent<Mover>();
         _physicsHandler = GetComponent<PhysicsHandler>();
         _comboer = GetComponent<Comboer>();
-        _leveler = GetComponent<Leveler>();
-        _experience = GetComponent<Experience>();
-        _health = GetComponent<Health>();
 
         GameManager.GameUnfreeze.AddListener(OnGameUnfreeze);
 
@@ -104,7 +98,7 @@ public class Player : MonoBehaviour
 
         if (collider.GetComponent<Entity>().GetType() == EntityType.Missile)
         {
-            HitMissile.Invoke(collider.GetComponent<Missile>());
+            HitProjectile.Invoke(collider.GetComponent<Projectile>());
         }
     }
 

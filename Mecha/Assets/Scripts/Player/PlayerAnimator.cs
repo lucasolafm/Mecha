@@ -32,7 +32,7 @@ public class PlayerAnimator : MonoBehaviour
         Player.Bounced.AddListener(OnBounced);
         Player.Attack.AddListener(OnAttack);
         Player.FinishAttack.AddListener(OnFinishAttack);
-        Player.HitMissile.AddListener(OnHitMissile);
+        Player.HitProjectile.AddListener(OnHitProjectile);
         Leveler.LeveledUp.AddListener(OnLeveledUp);
     }
 
@@ -61,7 +61,7 @@ public class PlayerAnimator : MonoBehaviour
         _attacking = false;
     }
 
-    private void OnHitMissile(Missile missile)
+    private void OnHitProjectile(Projectile projectile)
     {
         _jumping = true;
     }

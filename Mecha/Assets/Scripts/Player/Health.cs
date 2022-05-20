@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
     {
         Leveler.LeveledUp.AddListener(OnLeveledUp);
         Player.Attack.AddListener(OnAttack);
-        Player.HitMissile.AddListener(OnHitMissile);
+        Player.HitProjectile.AddListener(OnHitProjectile);
         
         _maxHealth = Player.Stats.MaxHealth;
         _currentHealth = _maxHealth;
@@ -39,7 +39,7 @@ public class Health : MonoBehaviour
         Shift(-damagePlane);
     }
 
-    private void OnHitMissile(Missile missile)
+    private void OnHitProjectile(Projectile projectile)
     {
         Shift(-damageMissile);
     }

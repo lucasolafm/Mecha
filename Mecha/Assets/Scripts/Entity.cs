@@ -12,24 +12,19 @@ public class Entity : MonoBehaviour
     [SerializeField] private EntityType type;
 
     [HideInInspector] public Transform Transform;
-    private SpriteRenderer _renderer;
+    [HideInInspector] public SpriteRenderer SpriteRenderer;
     private Collider2D _collider;
     private bool _isActive;
 
     void Awake()
     {
         Transform = transform;
-        _renderer = GetComponentInChildren<SpriteRenderer>();
+        SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _collider = GetComponent<Collider2D>();
     }
 
     public virtual void OnHit() { }
 
-    public SpriteRenderer GetRenderer()
-    {
-        return _renderer;
-    }
-    
     public Collider2D GetCollider()
     {
         return _collider;
