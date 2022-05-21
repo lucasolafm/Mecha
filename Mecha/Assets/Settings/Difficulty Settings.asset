@@ -17,7 +17,7 @@ MonoBehaviour:
   AmountExistEnemy: 17
   AmountExistPerEnemySpecial: 1
   AmountTiers: 5
-  TimeToMaxTier: 60
+  TimeToMaxTier: 500
   DamageBaseEnemy: 3.5
   MaxDamageBonusEnemy: 7
-  RatioDamageMissile: 0.3
+  RatioDamageMissile: 0.2

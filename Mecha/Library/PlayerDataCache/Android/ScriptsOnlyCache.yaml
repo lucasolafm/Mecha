@@ -4,22 +4,26 @@ ScriptsOnlyBuild:
     - Bouncer
     - CameraController
     - CameraSizePerScreenSize
+    - ClusterShotEnemy
     - Comboer
-    - Enemy
+    - DifficultySettings
     - EnemyManager
     - Experience
     - GameManager
     - Health
     - InputManager
+    - Laser
     - Leveler
     - Missile
-    - MissileManager
     - Mover
     - PhysicsHandler
     - PhysicsPauser
     - Player
     - PlayerAnimator
-    - PlayerBaseStats
+    - PlayerStats
+    - ProjectileManager
+    - QuadShotEnemy
+    - RegularEnemy
     - ResourceDisplayer
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
@@ -84,63 +88,71 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11986}
     - Class: 114
-      Script: {instanceID: 12212}
+      Script: {instanceID: 12116}
     - Class: 114
-      Script: {instanceID: 12298}
+      Script: {instanceID: 12214}
     - Class: 114
-      Script: {instanceID: 12348}
+      Script: {instanceID: 12254}
     - Class: 114
-      Script: {instanceID: 12378}
+      Script: {instanceID: 12300}
     - Class: 114
-      Script: {instanceID: 12474}
+      Script: {instanceID: 12350}
     - Class: 114
-      Script: {instanceID: 12482}
+      Script: {instanceID: 12380}
     - Class: 114
-      Script: {instanceID: 12496}
+      Script: {instanceID: 12476}
     - Class: 114
-      Script: {instanceID: 12668}
+      Script: {instanceID: 12484}
     - Class: 114
-      Script: {instanceID: 12836}
+      Script: {instanceID: 12498}
     - Class: 114
-      Script: {instanceID: 12938}
+      Script: {instanceID: 12502}
     - Class: 114
-      Script: {instanceID: 12996}
+      Script: {instanceID: 12840}
     - Class: 114
-      Script: {instanceID: 13066}
+      Script: {instanceID: 12942}
     - Class: 114
-      Script: {instanceID: 13216}
+      Script: {instanceID: 13000}
     - Class: 114
-      Script: {instanceID: 13260}
+      Script: {instanceID: 13070}
     - Class: 114
-      Script: {instanceID: 13658}
+      Script: {instanceID: 13220}
     - Class: 114
-      Script: {instanceID: 13910}
+      Script: {instanceID: 13266}
     - Class: 114
-      Script: {instanceID: 14098}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 14118}
+      Script: {instanceID: 13666}
     - Class: 114
-      Script: {instanceID: 14200}
+      Script: {instanceID: 13918}
     - Class: 114
-      Script: {instanceID: 14434}
+      Script: {instanceID: 14106}
+    - Class: 114
+      Script: {instanceID: 14126}
+    - Class: 114
+      Script: {instanceID: 14344}
     - Class: 114
       Script: {instanceID: 14442}
     - Class: 114
-      Script: {instanceID: 14546}
+      Script: {instanceID: 14450}
     - Class: 114
-      Script: {instanceID: 14710}
+      Script: {instanceID: 14554}
     - Class: 114
-      Script: {instanceID: 14840}
+      Script: {instanceID: 14718}
     - Class: 114
-      Script: {instanceID: 14906}
+      Script: {instanceID: 14848}
     - Class: 114
-      Script: {instanceID: 14984}
+      Script: {instanceID: 14914}
     - Class: 114
-      Script: {instanceID: 15008}
+      Script: {instanceID: 14992}
     - Class: 114
-      Script: {instanceID: 15188}
+      Script: {instanceID: 15016}
     - Class: 114
-      Script: {instanceID: 15190}
+      Script: {instanceID: 15116}
+    - Class: 114
+      Script: {instanceID: 15198}
+    - Class: 114
+      Script: {instanceID: 15200}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -189,7 +201,7 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: MissileManager
+    className: ProjectileManager
   - hash:
       serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
@@ -208,6 +220,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: GroupTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 6acd84fa0589350abf9c4e036d5b900e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ClusterShotEnemy
   - hash:
       serializedVersion: 2
       Hash: a5781dc71a671b1ad2b38de19f24b71f
@@ -258,13 +276,19 @@ ScriptsOnlyBuild:
     className: SpriteShapeController
   - hash:
       serializedVersion: 2
+      Hash: 615ee7a74ab517bd21e3e6a61222e7b3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerStats
+  - hash:
+      serializedVersion: 2
       Hash: 5f206dd3b0d6b103c9456019be49d644
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_InputField
   - hash:
       serializedVersion: 2
-      Hash: b69124e9e61b7b60d6ca235e1c28231c
+      Hash: 21887896c1dc8d8b16fef1907858655a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -318,7 +342,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 3a99c51d175e0924b0dcf45677825be5
+      Hash: 617423e92aec13440a73a6bfd0659c75
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Missile
@@ -330,10 +354,16 @@ ScriptsOnlyBuild:
     className: Experience
   - hash:
       serializedVersion: 2
-      Hash: 0d15df3d6a0122feac416374f82d7af9
+      Hash: a4e9be060c2ffb26ee539d604ff6fe94
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraSizePerScreenSize
+  - hash:
+      serializedVersion: 2
+      Hash: da0cd96535788d95cc3b07d8bc9918f7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DifficultySettings
   - hash:
       serializedVersion: 2
       Hash: bd3cf68c8964d3c66d1c43f4f98508c9
@@ -378,7 +408,7 @@ ScriptsOnlyBuild:
     className: PixelPerfectCamera
   - hash:
       serializedVersion: 2
-      Hash: 7da82703f7e4bf33be75f169b7e0cb52
+      Hash: baa57fe61d607338f9b4811bf4d1d2f7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Enemy
@@ -402,7 +432,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 5de9d47b143362e3fa6b14414233b6c9
+      Hash: c1334cb2bc92073282560f017e20fd94
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Health
@@ -462,10 +492,22 @@ ScriptsOnlyBuild:
     className: Mover
   - hash:
       serializedVersion: 2
-      Hash: 899479ec35add70ee4a8ad61f8b8d7ef
+      Hash: 521e10e051ab77cd78d8eda6cc7aaabe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Projectile
+  - hash:
+      serializedVersion: 2
+      Hash: 246b14bd06599fd0bc3c9c7a36549370
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
+  - hash:
+      serializedVersion: 2
+      Hash: 6be703d6dd62f0d668075feb852657fc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: QuadShotEnemy
   - hash:
       serializedVersion: 2
       Hash: 040dd48e3a027d5424519a5fa2009df4
@@ -588,16 +630,16 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 3e2c151b6eebe9833cb222c59302e0ba
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerBaseStats
-  - hash:
-      serializedVersion: 2
       Hash: c1933cc0a2f4ff6eb13333347497beb3
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 69d5c1cee7e8b35de9917cf34174238a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RegularEnemy
   - hash:
       serializedVersion: 2
       Hash: 309164bbb2e186465f143dd61115b4d0
@@ -624,7 +666,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 3a99c51d175e0924b0dcf45677825be5
+      Hash: 521e10e051ab77cd78d8eda6cc7aaabe
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Entity
@@ -636,7 +678,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 852c538370d46175b432067d6868e232
+      Hash: 71da30c424dae359c19798828cf4fbd8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyManager
@@ -694,6 +736,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Outline
+  - hash:
+      serializedVersion: 2
+      Hash: d69f07e9768fac7f08a52e73331fc50e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Laser
   - hash:
       serializedVersion: 2
       Hash: 134322c9293c1896357cce271b819ce4

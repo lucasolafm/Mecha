@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8689f2203d5408691e79a2af8ad5d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FPS: 110
   _difficultySettings: {fileID: 11400000, guid: 21d70fbc5c0e9c140a33ffa8b56b4529, type: 2}
   _player: {fileID: 1371868898}
   GameIsPaused: 0
@@ -622,11 +623,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1371868898}
-  leanHorizontalMax: 2
+  leanHorizontalMax: 1
   leanVerticalMax: 3
-  movementToLeanX: 0.015
+  movementToLeanX: 1
   movementToLeanY: 0.176
-  smoothingX: 0.015
+  smoothingX: 1
   smoothingY: 0.125
 --- !u!20 &519420031
 Camera:
@@ -655,7 +656,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.76
+  orthographic size: 7.115646
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -679,7 +680,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.35, z: -10}
+  m_LocalPosition: {x: 0, y: 0.62, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -697,7 +698,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ec461396606814b9b7ef813f62f0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneWidth: 7.609403
+  enabled: 1
+  sceneWidth: 8
+  testSceneWidth: 0
 --- !u!1 &698741230
 GameObject:
   m_ObjectHideFlags: 0

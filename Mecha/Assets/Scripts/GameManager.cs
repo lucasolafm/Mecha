@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static UnityEvent GameUnpause = new UnityEvent();
     public static UnityEvent GameUnfreeze = new UnityEvent();
 
+    [SerializeField] private int FPS;
     [SerializeField] private DifficultySettings _difficultySettings;
     [SerializeField] private Player _player;
     
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         Leveler.LeveledUp.AddListener(OnLeveledUp);
         
         I = this;
+        Application.targetFrameRate = FPS;
     }
 
     void FixedUpdate()

@@ -8,6 +8,6 @@ public class Laser : Projectile
     {
         if (GameManager.I.GameIsPaused) return;
         
-        transform.position += transform.right * speed;
+        transform.position += transform.right * speed * Time.deltaTime;
     }
 }

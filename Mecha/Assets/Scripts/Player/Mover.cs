@@ -2,6 +2,8 @@
 
 public class Mover : MonoBehaviour
 {
+    public static float CurrentSpeed;
+    
     public new Transform transform;
     [SerializeField] private float maxSpeedChangePerc;
     [SerializeField] private float minSpeedChange;
@@ -22,6 +24,7 @@ public class Mover : MonoBehaviour
         _speedChange = Mathf.Min(_targetSpeedChange, _maxSpeedChange);
 
         _currentSpeed += _speedChange * _direction;
-        transform.position += new Vector3(_currentSpeed * (Player.Stats.MoveSpeed * Time.deltaTime), 0);
+        transform.position += new Vector3(_currentSpeed * Player.Stats.MoveSpeed * Time.deltaTime, 0);
+        CurrentSpeed = _currentSpeed;
     }
 }

@@ -21,16 +21,12 @@ public class CameraController : MonoBehaviour
     {
         _minHeight = transform.position.y;
     }
-
-    private float highest;
+    
     public void Tick()
     {
         if (GameManager.I.GameIsPaused) return;    
-        
-        _posX = player.transform.position.x + 
-                Mathf.Clamp(player.GetMovement().x / movementToLeanX, -1, 1) * leanHorizontalMax;
 
-        transform.position += new Vector3((_posX - transform.position.x) * smoothingX, 0);
+        transform.position += new Vector3(player.transform.position.x + Mover.CurrentSpeed * movementToLeanX - transform.position.x, 0);
     }
 
     public void FixedTick()

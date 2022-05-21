@@ -74,7 +74,7 @@ MonoBehaviour:
   type: 1
   Transform: {fileID: 0}
   SpriteRenderer: {fileID: 0}
-  speed: 0.015
+  speed: 3
 --- !u!1 &2258968414640868999
 GameObject:
   m_ObjectHideFlags: 0

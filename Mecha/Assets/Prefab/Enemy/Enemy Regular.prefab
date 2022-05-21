@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8945f83e1a05e7c47882d51190ce510e, type: 3}
   - {fileID: 21300000, guid: bd6f5da91c9ea60468474ee96556b41c, type: 3}
   moveSpeed: 0.75
-  fireCooldownMin: 1
+  fireCooldownMin: 2
   fireCooldownMax: 3
   missilePrefab: {fileID: 7411055668319629514, guid: 2043e71feb5a9064992ea2e4f724fabd, type: 3}
 --- !u!1001 &5544487145682606326
