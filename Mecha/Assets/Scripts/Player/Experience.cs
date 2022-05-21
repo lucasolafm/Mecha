@@ -21,7 +21,7 @@ public class Experience : MonoBehaviour
         Player.Attack.AddListener(OnAttack);
     }
     
-    private void OnAttack(Enemy enemy, Vector2 position)
+    private void OnAttack(Enemy enemy)
     {
         Shift(xpGainBase + xpGainPerCombo * _player.GetCurrentCombo());
     }

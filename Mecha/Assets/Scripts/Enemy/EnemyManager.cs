@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -8,9 +9,6 @@ public class EnemyManager : MonoBehaviour
     public Transform player;
     public new Camera camera;
     [SerializeField] private Transform enemyDeathVisual;
-    [SerializeField] private Sprite[] tierSprites;
-    [SerializeField] private int regularEnemiesInRange;
-    [SerializeField] private int specialEnemyAmountPer;
     public float minSpawnHeight;
     public float sideOfScreenMaxOffset;
     public float spawnRangeUp;
@@ -19,8 +17,8 @@ public class EnemyManager : MonoBehaviour
     public float lowSpawnRangeHeight;
     public int enemiesInRangeLow;
     public float firingRange;
-    [SerializeField] private float timeToMaxDifficulty;
 
+    private DifficultySettings _difficultySettings;
     private Enemy[] _enemies;
     private static Dictionary<Collider2D, Enemy> _enemyOfCollider = new Dictionary<Collider2D, Enemy>();
     private float _timePlaying;
@@ -33,12 +31,14 @@ public class EnemyManager : MonoBehaviour
     private Queue<Enemy> _enemiesOutOfRange = new Queue<Enemy>();
     private int _currentEnemiesInRangeLow;
     private int _tierMin;
+    private static Enemy _enemy;
 
     void Awake()
     {
         Player.Attack.AddListener(OnAttack);
         Player.FinishAttack.AddListener(OnFinishAttack);
-        
+
+        _difficultySettings = GameManager.I.GetDifficultySettings();
         _screenWorldSize = camera.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)) - 
                            camera.ScreenToWorldPoint(Vector2.zero);
     }
@@ -56,7 +56,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         _timePlaying += Time.deltaTime;
-        _currentGeneralTier = -0.5f + _timePlaying / timeToMaxDifficulty * tierSprites.Length;
+        _currentGeneralTier = -0.5f + _timePlaying / _difficultySettings.TimeToMaxTier * _difficultySettings.AmountTiers;
 
         _currentEnemiesInRangeLow = 0;
         foreach (Enemy enemy in _enemies)
@@ -81,15 +81,15 @@ public class EnemyManager : MonoBehaviour
 
     public static Enemy GetEnemy(Collider2D collider)
     {
-        _enemyOfCollider.TryGetValue(collider, out Enemy enemy);
-        return enemy;
+        _enemyOfCollider.TryGetValue(collider, out _enemy);
+        return _enemy;
     }
     
-    private void OnAttack(Enemy enemy, Vector2 position)
+    private void OnAttack(Enemy enemy)
     {
         enemyDeathVisual.gameObject.SetActive(true);
         enemyDeathVisual.position = enemy.transform.position;
-        SpawnEnemy(enemy);
+        StartCoroutine(RespawnEnemy(enemy));
     }
     
     private void OnFinishAttack()
@@ -118,40 +118,43 @@ public class EnemyManager : MonoBehaviour
         }
 
         enemy.Transform.position = _position;
-        //enemy.GetRenderer().sprite = GetTierSprite();
-        enemy.SetDirection(_direction);
         enemy.SetHidden(_position.y < minSpawnHeight);
+        enemy.SetTier(GenerateTier());
+        enemy.SetDirection(_direction);
     }
 
-    private Sprite GetTierSprite()
+    private IEnumerator RespawnEnemy(Enemy enemy)
     {
-        _tierMin = Mathf.Max(Mathf.FloorToInt(_currentGeneralTier), 0);
-        return tierSprites[Mathf.Min(_tierMin + (Random.Range(0, 1f) < _currentGeneralTier - _tierMin ? 
-                                                   1 : 0), tierSprites.Length - 1)];
+        enemy.gameObject.SetActive(false);
+        yield return null;
+        enemy.gameObject.SetActive(true);
+        SpawnEnemy(enemy);
     }
 
     private Enemy[] CreateEnemies()
     {
-        Enemy[] enemies = new Enemy[regularEnemiesInRange + specialEnemyAmountPer * enemySpecialPrefabs.Length];
+        Enemy[] enemies = new Enemy[_difficultySettings.AmountExistEnemy];
         Enemy enemy;
-        for (int i = 0; i < regularEnemiesInRange; i++)
+        int indexEnemySpecial;
+        for (int i = 0; i < enemies.Length; i++)
         {
-            enemy = Instantiate(enemyRegularPrefab);
+            indexEnemySpecial = i / _difficultySettings.AmountExistPerEnemySpecial;
+            enemy = Instantiate(indexEnemySpecial < enemySpecialPrefabs.Length ? 
+                enemySpecialPrefabs[indexEnemySpecial] : 
+                enemyRegularPrefab);
+            
             enemies[i] = enemy;
             _enemyOfCollider[enemy.GetCollider()] = enemy;
         }
 
-        for (int i = 0; i < enemySpecialPrefabs.Length; i++)
-        {
-            for (int j = 0; j < specialEnemyAmountPer; j++)
-            {
-                enemy = Instantiate(enemySpecialPrefabs[i]);
-                enemies[regularEnemiesInRange + i * specialEnemyAmountPer + j] = enemy;
-                _enemyOfCollider[enemy.GetCollider()] = enemy;
-            }
-        }
-
         return enemies;
+    }
+    
+    private int GenerateTier()
+    {
+        _tierMin = Mathf.Max(Mathf.FloorToInt(_currentGeneralTier), 0);
+        return Mathf.Min(_tierMin + (Random.Range(0, 1f) < _currentGeneralTier - _tierMin ? 
+            1 : 0), _difficultySettings.AmountTiers - 1);
     }
 
     private bool IsInSpawnRange(Vector2 position)

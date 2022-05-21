@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+    [SerializeField] private Sprite[] tierSprites;
     public float moveSpeed;
     public float fireCooldownMin;
     public float fireCooldownMax;
 
     private bool _hidden;
+    private int _tier;
     private float _currentLaunchCooldown;
     private int _direction;
     private bool _firingEnabled;
@@ -38,6 +40,17 @@ public class Enemy : Entity
     public override void OnHit()
     {
         gameObject.SetActive(false);
+    }
+
+    public int GetTier()
+    {
+        return _tier;
+    }
+
+    public void SetTier(int tier)
+    {
+        _tier = tier;
+        SpriteRenderer.sprite = tierSprites[Mathf.Min(_tier, tierSprites.Length - 1)];
     }
 
     public void SetDirection(int direction)

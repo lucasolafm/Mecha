@@ -36,17 +36,17 @@ public class PlayerAnimator : MonoBehaviour
         Leveler.LeveledUp.AddListener(OnLeveledUp);
     }
 
-    private void OnAttack(Enemy enemy, Vector2 position)
+    private void OnAttack(Enemy enemy)
     {
         _attacking = true;
         _jumping = true;
-        renderer.flipX = transform.position.x - position.x > 0;
+        renderer.flipX = transform.position.x - enemy.transform.position.x > 0;
 
-        if (position.y > _collider.bounds.center.y + _collider.bounds.size.y / 2)
+        if (enemy.transform.position.y > _collider.bounds.center.y + _collider.bounds.size.y / 2)
         {
             renderer.sprite = attacksUpwards[Random.Range(0, attacksUpwards.Length)];
         }
-        else if (position.y < _collider.bounds.center.y - _collider.bounds.size.y / 2)
+        else if (enemy.transform.position.y < _collider.bounds.center.y - _collider.bounds.size.y / 2)
         {
             renderer.sprite = attacksDownwards[Random.Range(0, attacksDownwards.Length)];
         }

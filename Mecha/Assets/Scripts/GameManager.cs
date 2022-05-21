@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static UnityEvent GameUnpause = new UnityEvent();
     public static UnityEvent GameUnfreeze = new UnityEvent();
 
+    [SerializeField] private DifficultySettings _difficultySettings;
     [SerializeField] private Player _player;
     
     [HideInInspector] public bool GameIsPaused;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
         UnpauseGame();
     }
 
-    private void OnAttack(Enemy enemy, Vector2 position)
+    private void OnAttack(Enemy enemy)
     {
         FreezeGame(freezeTimeBase + freezeTimePerCombo * _player.GetCurrentCombo());
     }
@@ -53,6 +54,11 @@ public class GameManager : MonoBehaviour
     private void OnLeveledUp()
     {
         FreezeGame(freezeTimeLevelUp);
+    }
+
+    public DifficultySettings GetDifficultySettings()
+    {
+        return _difficultySettings;
     }
 
     public void PauseGame()

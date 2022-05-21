@@ -10,12 +10,10 @@ public class Health : MonoBehaviour
     public static UnityEvent ResetResourcesFromLevelUp = new UnityEvent();
     
     [SerializeField] private TextMeshProUGUI healthMaxText;
-
-    [SerializeField] private float damagePlane;
-    [SerializeField] private float damageMissile;
-
+    
     private float _currentHealth;
     private int _maxHealth;
+    private DifficultySettings _difficultySettings;
     
     void Awake()
     {
@@ -23,25 +21,26 @@ public class Health : MonoBehaviour
         Player.Attack.AddListener(OnAttack);
         Player.HitProjectile.AddListener(OnHitProjectile);
         
-        _maxHealth = Player.Stats.MaxHealth;
+        _maxHealth = GameManager.I.GetDifficultySettings().MaxHealthBase;
         _currentHealth = _maxHealth;
+        _difficultySettings = GameManager.I.GetDifficultySettings();
     }
 
     private void OnLeveledUp()
     {
-        ShiftMax(Player.Stats.MaxHealthPerLevel);
+        ShiftMax(GameManager.I.GetDifficultySettings().MaxHealthPerLevel);
         _currentHealth = _maxHealth;
         ResetResourcesFromLevelUp.Invoke();
     }
 
-    private void OnAttack(Enemy enemy, Vector2 position)
+    private void OnAttack(Enemy enemy)
     {
-        Shift(-damagePlane);
+        Shift(-GetEnemyDamage(enemy.GetTier()));
     }
 
     private void OnHitProjectile(Projectile projectile)
     {
-        Shift(-damageMissile);
+        Shift(-GetEnemyDamage(projectile.GetTier()) * _difficultySettings.RatioDamageMissile);
     }
 
     public float GetCurrent()
@@ -63,5 +62,12 @@ public class Health : MonoBehaviour
     {
         _maxHealth += value;
         healthMaxText.text = "MAX " + _maxHealth;
+    }
+
+    private float GetEnemyDamage(int tier)
+    {
+        return _difficultySettings.DamageBaseEnemy +
+               _difficultySettings.DamageBonusEnemyCurve((float) tier / (_difficultySettings.AmountTiers - 1)) *
+               _difficultySettings.MaxDamageBonusEnemy;
     }
 }

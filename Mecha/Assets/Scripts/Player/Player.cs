@@ -9,12 +9,12 @@ public class Player : MonoBehaviour
     public static UnityEvent Landed = new UnityEvent();
     public static UnityEvent Bounced = new UnityEvent();
     public static UnityEvent HitEntity = new UnityEvent();
-    public static UnityEvent<Enemy, Vector2> Attack = new UnityEvent<Enemy, Vector2>();
+    public static UnityEvent<Enemy> Attack = new UnityEvent<Enemy>();
     public static UnityEvent FinishAttack = new UnityEvent();
     public static UnityEvent<Projectile> HitProjectile = new UnityEvent<Projectile>();
 
     [SerializeField] private CameraController cameraController;
-    [SerializeField] private PlayerBaseStats baseStats;
+    [SerializeField] private PlayerStats stats;
 
     private Rigidbody2D _rb;
     private Mover _mover;
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
         GameManager.GameUnfreeze.AddListener(OnGameUnfreeze);
 
-        Stats = (PlayerStats)baseStats.Stats.Clone();
+        Stats = stats;
         _prevPosition = transform.position;
         _prevPositionRb = _rb.position;
     }
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
         _hitEnemy = EnemyManager.GetEnemy(collider);
         if (_hitEnemy)
         {
-            Attack.Invoke(_hitEnemy, _hitEnemy.transform.position);
+            Attack.Invoke(_hitEnemy);
         }
 
         if (collider.GetComponent<Entity>().GetType() == EntityType.Missile)

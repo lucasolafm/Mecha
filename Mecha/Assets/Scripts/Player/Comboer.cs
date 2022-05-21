@@ -21,7 +21,7 @@ public class Comboer : MonoBehaviour
          _currentCombo = 0;
      }
 
-    private void OnAttack(Enemy enemy, Vector2 position)
+    private void OnAttack(Enemy enemy)
     {
         IncreaseCombo();
     }

@@ -33,8 +33,6 @@
             <e p="Player.cs" t="Include" />
             <e p="PlayerAnimator.cs" t="Include" />
           </e>
-          <e p="PlayerBaseStats.cs" t="Include" />
-          <e p="PlayerStats.cs" t="Include" />
           <e p="Projectile" t="Include">
             <e p="Laser.cs" t="Include" />
             <e p="Missile.cs" t="Include" />
@@ -42,6 +40,10 @@
           </e>
           <e p="ProjectileManager.cs" t="Include" />
           <e p="ResourceDisplayer.cs" t="Include" />
+          <e p="Settings" t="Include">
+            <e p="DifficultySettings.cs" t="Include" />
+            <e p="PlayerStats.cs" t="Include" />
+          </e>
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
